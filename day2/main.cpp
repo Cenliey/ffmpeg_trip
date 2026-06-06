@@ -226,7 +226,7 @@ namespace {
                 av_packet_unref(pkt.get());
                 continue;
             }
-            av_packet_unref(pkt.get());
+            av_packet_unref(pkt.get());//unref为了及时释放packet的数据，防止内存泄漏
 
             while (avcodec_receive_frame(ctx.codec_ctx.get(), ctx.frame.get()) == 0) {
                 // convert decoder output -> YUV420P directly on texture memory
